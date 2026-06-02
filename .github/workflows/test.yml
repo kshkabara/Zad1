@@ -1,0 +1,12 @@
+name: Test Action
+
+on:
+  push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hello
+        run: echo "GitHub Actions działa!"
