@@ -21,8 +21,14 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+          
+      - name: Login DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
 
       - name: Build and Push
         uses: docker/build-push-action@v6
@@ -30,4 +36,6 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ghcr.io/kshkabara/zad1:latest
+          tags: ghcr.io/kshkabara/zad2:latest
+          cache-from: type=registry,ref=docker.io/kshka/zad2cache:buildcache
+          cache-to: type=registry,ref=docker.io/kshka/zad2cache:buildcache,mode=max
