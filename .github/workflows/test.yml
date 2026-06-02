@@ -11,6 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup QEMU
+        uses: docker/setup-qemu@v3
+
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -26,5 +29,5 @@ jobs:
         with:
           context: .
           push: true
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           tags: ghcr.io/kshkabara/zad1:latest
